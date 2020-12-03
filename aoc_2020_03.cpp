@@ -10,7 +10,6 @@ read_input()
     while (std::cin)
     {
         std::string line;
-        char ignore;
         if (std::getline(std::cin, line))
         {
             input.push_back(line);
