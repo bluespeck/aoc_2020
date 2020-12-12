@@ -30,14 +30,23 @@ solve_1(const input_t& input)
     int x = 0;
     int y = 0;
     int facing = 0;
+    std::map<int, char> directions = {
+        {   0, 'E'},
+        {  90, 'N'},
+        { 180, 'W'},
+        { 270, 'S'}
+    };
+
     for (auto e : input)
     {
-        switch (e.name)
+        if (facing < 0)
+            facing += 360;
+        switch (e.name == 'F' ? directions[facing % 360] : e.name)
         {
         case 'N':
             y += e.value;
             break;
-        case 'S':
+        case 'S':                 
             y -= e.value;
             break;
         case 'E':
@@ -51,25 +60,6 @@ solve_1(const input_t& input)
             break;
         case 'R':
             facing -= e.value;
-            break;
-        case 'F':
-            if (facing < 0)
-                facing += 360;
-            switch (facing % 360)
-            {
-            case 90:
-                y += e.value;
-                break;
-            case 270:
-                y -= e.value;
-                break;
-            case 0:
-                x += e.value;
-                break;
-            case 180:
-                x -= e.value;
-                break;
-            }
             break;
         }
     }
